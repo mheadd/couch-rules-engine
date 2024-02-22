@@ -36,32 +36,32 @@ Clone this repo and `cd` into the project directory. Install dependencies: `npm 
 Tests can be found in the `test` directory and can be run by doing the following:
 
 ```bash
-~$ npm test
+npm test
 ```
 
 To run CouchDB locally via Docker (note - you may want to change the admin password):
 
 ```bash
-~$ docker pull couchdb
-~$ docker run -p 5984:5984 -e COUCHDB_USER=admin -e COUCHDB_PASSWORD=password -d couchdb
+docker pull couchdb
+docker run -p 5984:5984 -e COUCHDB_USER=admin -e COUCHDB_PASSWORD=password -d couchdb
 ```
 
 Check that your instance is running:
 
 ```bash
-~$ curl http://localhost:5984/
+curl http://localhost:5984/
 ```
 
 Create a test database:
 
 ```bash
-~$ curl -X PUT http://admin:password@localhost:5984/test
+curl -X PUT http://admin:password@localhost:5984/test
 ```
 
 Populate the database with the validation rules (located in the `validators` directory):
 
 ```bash
-~$ npm run load test admin password
+npm run load test admin password
 ```
 
 You should see the following output:
@@ -76,7 +76,7 @@ Successfully loaded numberOfDependents validator
 Test submitting a **valid** application for service (located in the `samples` directory):
 
 ```bash
-~$ curl -X POST http://admin:password@localhost:5984/test -d @samples/sample_person_valid.json -H 'Content-type: application/json'
+curl -X POST http://admin:password@localhost:5984/test -d @samples/sample_person_valid.json -H 'Content-type: application/json'
 ```
 
 Sample result:
@@ -92,7 +92,7 @@ Sample result:
 Test submitting an **invalid** application for service (located in the `samples` directory):
 
 ```bash
-~$ curl -X POST http://admin:password@localhost:5984/test -d @samples/sample_person_invalid.json -H 'Content-type: application/json'
+curl -X POST http://admin:password@localhost:5984/test -d @samples/sample_person_invalid.json -H 'Content-type: application/json'
 ```
 
 Sample result:
