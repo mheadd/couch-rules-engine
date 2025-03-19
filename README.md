@@ -1,12 +1,10 @@
-![Run unit tests](https://github.com/18F/couch-rules-engine/workflows/Run%20unit%20tests/badge.svg)
-
 # Couch Rules: Using CouchDB as a Rules Engine
 
 This is a prototype effort to evaluate the suitability of using [CouchDB](http://couchdb.apache.org/) as the foundation for a rules engine using the built in [document validation features](http://docs.couchdb.org/en/stable/ddocs/ddocs.html#validate-document-update-functions).
 
 ## CouchDB overview
 
-CouchDB is a document-oriented database that stores documents in JSON format and supports [map/reduce](http://docs.couchdb.org/en/2.2.0/ddocs/ddocs.html#view-functions) for querying documents. CouchDB exposes a number of [REST endpoints](https://docs.couchdb.org/en/latest/intro/api.html) for interacting and managing single instances or clusters. In addition, CouchDB supports a special type of document called a [design document](http://docs.couchdb.org/en/2.2.0/ddocs/index.html) that are used to query, display, aggregate and validate updates to data in a CouchDB database.
+CouchDB is a document-oriented database that stores documents in JSON format and supports [map/reduce]([http://docs.couchdb.org/en/2.2.0/ddocs/ddocs.html#view-functions](https://docs.couchdb.org/en/stable/ddocs/views/intro.html)) for querying documents. CouchDB exposes a number of [REST endpoints](https://docs.couchdb.org/en/latest/intro/api.html) for interacting and managing single instances or clusters. In addition, CouchDB supports a special type of document called a [design document](https://docs.couchdb.org/en/stable/api/ddoc/index.html) that are used to query, display, aggregate and validate updates to data in a CouchDB database.
 
 When creating or updating a document in a CouchDB database, validation functions are used to "prevent invalid or unauthorized document update requests from being stored."
 
@@ -21,7 +19,7 @@ Validation rules can be used to ensure that only "valid" data is saved, or that 
 * Ability to write validation rules in JavaScript.
 * Ability to dis-aggregate complex rules into smaller bits of logic as separate, standalone design docs.
 * Ability to create and use existing JavaScript testing frameworks to more effectively manage rule sets.
-* Ability to replicate rule sets across CouchDB instances using built in [replication features](http://docs.couchdb.org/en/2.2.0/replication/index.html).
+* Ability to replicate rule sets across CouchDB instances using built in [replication features](https://docs.couchdb.org/en/stable/replication/index.html#replication).
 
 ## Drawbacks / challenges
 
