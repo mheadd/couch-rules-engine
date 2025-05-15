@@ -95,7 +95,7 @@ curl -X POST http://admin:password@localhost:5984/test -d @samples/sample_person
 
 Sample result:
 
-```code
+```json
 {
   "error": "forbidden",
   "reason": "Income must be lower than $25,000"
