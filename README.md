@@ -29,7 +29,29 @@ Validation rules can be used to ensure that only "valid" data is saved, or that 
 
 ## Using this prototype
 
-Clone this repo and `cd` into the project directory. Install dependencies: `npm install`.
+Clone this repo and `cd` into the project directory.
+
+Instead of running each setup step manually, you can now use the provided `setup.sh` script to automatically pull and run CouchDB in Docker, create the test database, install dependencies, and load validation rules.
+
+**To set up and run everything:**
+
+```bash
+./setup.sh
+```
+
+This script will:
+
+- Pull the CouchDB Docker image
+- Start a CouchDB container on port 5984 (default admin/password: admin/password)
+- Create a test database named `test`
+- Install npm dependencies
+- Load validation rules into CouchDB
+
+You can now test submitting documents to CouchDB as described below.
+
+---
+
+### Running tests
 
 Tests can be found in the `test` directory and can be run by doing the following:
 
@@ -37,39 +59,7 @@ Tests can be found in the `test` directory and can be run by doing the following
 npm test
 ```
 
-To run CouchDB locally via Docker (note - you may want to change the admin password):
-
-```bash
-docker pull couchdb
-docker run -p 5984:5984 -e COUCHDB_USER=admin -e COUCHDB_PASSWORD=password -d couchdb
-```
-
-Check that your instance is running:
-
-```bash
-curl http://localhost:5984/
-```
-
-Create a test database:
-
-```bash
-curl -X PUT http://admin:password@localhost:5984/test
-```
-
-Populate the database with the validation rules (located in the `validators` directory):
-
-```bash
-npm run load test admin password
-```
-
-You should see the following output:
-```bash
-Successfully loaded householdIncome validator
-Successfully loaded interviewComplete validator
-Successfully loaded householdSize validator
-Successfully loaded numberOfDependents validator
-```
-
+### Submitting documents
 
 Test submitting a **valid** application for service (located in the `samples` directory):
 
