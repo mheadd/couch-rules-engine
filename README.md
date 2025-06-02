@@ -31,8 +31,6 @@ Validation rules can be used to ensure that only "valid" data is saved, or that 
 
 Clone this repo and `cd` into the project directory.
 
-Instead of running each setup step manually, you can now use the provided `setup.sh` script to automatically pull and run CouchDB in Docker, create the test database, install dependencies, and load validation rules.
-
 **To set up and run everything:**
 
 ```bash
