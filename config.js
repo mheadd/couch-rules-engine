@@ -1,3 +1,5 @@
 exports.options = {
-    couchdb_url: `http://${process.argv[3]}:${process.argv[4]}@localhost:5984/` || process.argv[5]
+    couchdb_url: `http://localhost:5984/`,
+    username: process.argv[3] || 'admin',
+    password: process.argv[4] || 'password'
 }

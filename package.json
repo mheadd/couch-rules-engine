@@ -10,9 +10,7 @@
   },
   "author": "Mark J. Headd (mheadd@gmail.com)",
   "license": "ISC",
-  "dependencies": {
-    "request": "^2.88.0"
-  },
+  "dependencies": {},
   "devDependencies": {
     "mocha": "^10.2.0"
   }
