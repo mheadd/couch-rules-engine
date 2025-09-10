@@ -49,39 +49,25 @@ This document outlines the development roadmap for evolving the CouchDB Rules En
 
 **Task**: Restructure tests into modular, discoverable files
 
+```
 test/
-
 ├── unit/
-
 │   └── validators/
-
 │       ├── householdIncome.test.js
-
 │       ├── interviewComplete.test.js
-
 │       ├── householdSize.test.js
-
 │       └── numberOfDependents.test.js
-
 ├── integration/
-
 │   ├── couchdb-connection.test.js
-
 │   └── rule-execution.test.js
-
 ├── helpers/
-
 │   ├── couchdb-helper.js
-
 │   ├── mock-data-generator.js
-
 │   └── test-setup.js
-
 └── fixtures/
-
     ├── sample-documents/
-
     └── expected-results/
+```
 
 **Implementation Notes**:
 
@@ -96,39 +82,22 @@ test/
 
 ```json
 {
-
   "_id": "_design/ruleName",
-
   "_rev": "auto-managed-by-couchdb",
-
   "rule_metadata": {
-
     "name": "Human-readable rule name",
-
     "description": "Detailed description of rule purpose",
-
     "version": "semantic-version",
-
     "author": "rule-author",
-
     "tags": ["category", "keywords"],
-
     "status": "active|draft|inactive",
-
     "created_date": "ISO-date",
-
     "modified_date": "ISO-date",
-
     "change_notes": "Description of last change"
-
   },
-
   "validate_doc_update": function(newDoc, oldDoc, userCtx) {
-
     // validation logic
-
   }
-
 }
 ```
 
@@ -139,8 +108,8 @@ test/
 
 **File Structure**:
 
+```
 web/
-
 ├── index.html (single-page application)
 ├── css/
 │   ├── main.css (minimal, themeable styles)
@@ -154,6 +123,7 @@ web/
     └── utils/
         ├── couchdb-client.js
         └── helpers.js
+```
 
 **Features**:
 
@@ -228,7 +198,7 @@ web/
 **Task**: Streamline new rule creation
 
 * Common validation patterns as templates
-* Rule generator script (`npm run generate:rule &lt;name>`)
+* Rule generator script (`npm run generate:rule <name>`)
 * Auto-generate test scaffolding for new rules
 * Validation function code snippets library
 
