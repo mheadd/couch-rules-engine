@@ -4,6 +4,8 @@
 
 This is a prototype effort to evaluate the suitability of using [CouchDB](http://couchdb.apache.org/) as the foundation for a rules engine using the built in [document validation features](http://docs.couchdb.org/en/stable/ddocs/ddocs.html#validate-document-update-functions).
 
+Note - [ROADMAP.md](ROADMAP.md ) file contains next steps for building this project out.
+
 ## CouchDB overview
 
 CouchDB is a document-oriented database that stores documents in JSON format and supports [map/reduce]([http://docs.couchdb.org/en/2.2.0/ddocs/ddocs.html#view-functions](https://docs.couchdb.org/en/stable/ddocs/views/intro.html)) for querying documents. CouchDB exposes a number of [REST endpoints](https://docs.couchdb.org/en/latest/intro/api.html) for interacting and managing single instances or clusters. In addition, CouchDB supports a special type of document called a [design document](https://docs.couchdb.org/en/stable/api/ddoc/index.html) that are used to query, display, aggregate and validate updates to data in a CouchDB database.
