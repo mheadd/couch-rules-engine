@@ -1,0 +1,107 @@
+{
+  "description": "Expected validation results for sample documents",
+  "testCases": {
+    "sample_person_valid.json": {
+      "shouldPass": true,
+      "expectedResult": {
+        "ok": true,
+        "hasId": true,
+        "hasRev": true
+      },
+      "validationRules": {
+        "householdIncome": "pass",
+        "householdSize": "pass", 
+        "numberOfDependents": "pass",
+        "interviewComplete": "pass"
+      }
+    },
+    "sample_person_invalid.json": {
+      "shouldPass": false,
+      "expectedError": {
+        "error": "forbidden",
+        "containsReason": true
+      },
+      "validationRules": {
+        "householdIncome": "fail",
+        "householdSize": "fail",
+        "numberOfDependents": "fail", 
+        "interviewComplete": "fail"
+      },
+      "expectedReasons": [
+        "Income must be lower than $25,000",
+        "Household size must be greater than 2.",
+        "The number of dependents in the household must be 1 or more.",
+        "Interview must be completed."
+      ]
+    }
+  },
+  "edgeCases": {
+    "income_at_threshold": {
+      "document": {
+        "income": 25000,
+        "householdSize": 3,
+        "numberOfDependents": 2,
+        "interviewComplete": "true"
+      },
+      "shouldPass": true
+    },
+    "income_over_threshold": {
+      "document": {
+        "income": 25001,
+        "householdSize": 3,
+        "numberOfDependents": 2,
+        "interviewComplete": "true"
+      },
+      "shouldPass": false,
+      "expectedReason": "Income must be lower than $25,000"
+    },
+    "household_size_at_threshold": {
+      "document": {
+        "income": 20000,
+        "householdSize": 3,
+        "numberOfDependents": 2,
+        "interviewComplete": "true"
+      },
+      "shouldPass": true
+    },
+    "household_size_under_threshold": {
+      "document": {
+        "income": 20000,
+        "householdSize": 2,
+        "numberOfDependents": 2,
+        "interviewComplete": "true"
+      },
+      "shouldPass": false,
+      "expectedReason": "Household size must be greater than 2."
+    },
+    "dependents_at_threshold": {
+      "document": {
+        "income": 20000,
+        "householdSize": 3,
+        "numberOfDependents": 2,
+        "interviewComplete": "true"
+      },
+      "shouldPass": true
+    },
+    "dependents_under_threshold": {
+      "document": {
+        "income": 20000,
+        "householdSize": 3,
+        "numberOfDependents": 1,
+        "interviewComplete": "true"
+      },
+      "shouldPass": false,
+      "expectedReason": "The number of dependents in the household must be 1 or more."
+    },
+    "interview_empty": {
+      "document": {
+        "income": 20000,
+        "householdSize": 3,
+        "numberOfDependents": 2,
+        "interviewComplete": ""
+      },
+      "shouldPass": false,
+      "expectedReason": "Interview must be completed."
+    }
+  }
+}
