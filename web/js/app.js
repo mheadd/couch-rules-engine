@@ -190,6 +190,11 @@ class App {
             // Show connection settings if not connected
             setTimeout(() => {
                 if (!this.state.isConnected) {
+                    // Check if we have username but no password (authentication may be needed)
+                    const client = getCouchDBClient();
+                    if (client.config.username && !client.config.password) {
+                        Notifications.error('Authentication required. Please enter your password in connection settings.');
+                    }
                     this.showConnectionSettings();
                 }
             }, 1000);
@@ -375,9 +380,10 @@ class App {
                         type="password" 
                         id="couchdb-password" 
                         class="form-control" 
-                        value="${StringUtils.escapeHtml(config.password || '')}"
+                        value=""
                         placeholder="••••••••"
                     >
+                    <small class="form-text">Password is not stored for security. Re-enter each session.</small>
                 </div>
                 
                 <div class="connection-test">
@@ -426,15 +432,30 @@ class App {
             host: urlObj.hostname,
             port: urlObj.port || (urlObj.protocol === 'https:' ? 443 : 5984),
             database,
-            username: username || null,
-            password: password || null
+            username: username || null
+            // Note: Password is not stored in localStorage for security reasons
         };
         
-        // Save to localStorage
+        // Only include password if it's provided and username is also provided
+        if (username && password) {
+            // Still don't store password in localStorage - it will be prompted for each session
+            console.log('Password provided but not stored in localStorage for security');
+        }
+        
+        // Save to localStorage (without password)
         localStorage.setItem('couchdb-connection-settings', JSON.stringify(settings));
         
         // Reset client to use new settings
         resetCouchDBClient();
+        
+        // If password was provided, update the client with temporary credentials
+        if (username && password) {
+            const client = getCouchDBClient();
+            client.updateConfig({
+                username: username,
+                password: password
+            });
+        }
         
         Modal.hide();
         
@@ -469,8 +490,11 @@ class App {
             const password = DOM.get('couchdb-password')?.value.trim();
             
             // Create temporary client for testing
+            const urlObj = new URL(url);
             const testClient = new CouchDBClient({
-                url,
+                protocol: urlObj.protocol.slice(0, -1),
+                host: urlObj.hostname,
+                port: urlObj.port || (urlObj.protocol === 'https:' ? 443 : 5984),
                 database,
                 username: username || null,
                 password: password || null
