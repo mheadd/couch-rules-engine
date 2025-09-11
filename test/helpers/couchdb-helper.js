@@ -114,6 +114,51 @@ class CouchDBHelper {
     }
 
     /**
+     * Load a design document with metadata into the database
+     */
+    async loadDesignDocumentWithMetadata(name, validationFunction, metadata) {
+        const designDoc = {
+            _id: `_design/${name}`,
+            validate_doc_update: validationFunction.toString(),
+            rule_metadata: metadata
+        };
+
+        const response = await fetch(this.dbUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Basic ${this.auth}`
+            },
+            body: JSON.stringify(designDoc)
+        });
+
+        if (!response.ok) {
+            const error = await response.json();
+            throw new Error(error.reason || `Failed to load design document with metadata: ${response.status}`);
+        }
+
+        return await response.json();
+    }
+
+    /**
+     * Retrieve a design document from the database
+     */
+    async getDesignDocument(name) {
+        const response = await fetch(`${this.dbUrl}/_design/${name}`, {
+            headers: {
+                'Authorization': `Basic ${this.auth}`
+            }
+        });
+
+        if (!response.ok) {
+            const error = await response.json();
+            throw new Error(error.reason || `Failed to get design document: ${response.status}`);
+        }
+
+        return await response.json();
+    }
+
+    /**
      * Check if CouchDB is running and accessible
      */
     async isAccessible() {

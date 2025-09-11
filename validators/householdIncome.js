@@ -1,3 +1,5 @@
+const { createRuleMetadata, VALIDATOR_METADATA } = require('../utils/rule-metadata');
+
 // Validation rule for household income
 exports.householdIncome = function (doc) {
     if (doc.income > 25000) {
@@ -7,3 +9,6 @@ exports.householdIncome = function (doc) {
     }
     return true;
 };
+
+// Export metadata for this validator
+exports.metadata = createRuleMetadata(VALIDATOR_METADATA.householdIncome);

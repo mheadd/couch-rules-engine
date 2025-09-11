@@ -170,6 +170,7 @@ web/
 * Add rule testing capabilities
 * Create rule templates and generators
 * Enhance validation with multiple error reporting
+* Update associated documentation files (e.g., METADATA_GUIDE.md, TESTING_GUIDE.md) if needed
 
 ### **Technical Tasks**
 

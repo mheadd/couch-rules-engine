@@ -95,6 +95,52 @@ describe('CouchDB Connection Integration Tests', function() {
             assert.strictEqual(result.ok, true, 'Design document should be loaded successfully');
         });
 
+        it('should load a design document with metadata', async function() {
+            const { createRuleMetadata } = require('../../utils/rule-metadata');
+            const validator = function(newDoc, oldDoc, userCtx) {
+                if (!newDoc.test_field) {
+                    throw({forbidden: 'test_field is required'});
+                }
+                return true;
+            };
+
+            const metadata = createRuleMetadata({
+                name: 'Test Validator with Metadata',
+                description: 'A test validator that includes metadata'
+            });
+
+            const result = await couchHelper.loadDesignDocumentWithMetadata('testValidatorMeta', validator, metadata);
+            assert.strictEqual(result.ok, true, 'Design document with metadata should be loaded successfully');
+        });
+
+        it('should retrieve design document with metadata', async function() {
+            const { createRuleMetadata } = require('../../utils/rule-metadata');
+            const validator = function(newDoc, oldDoc, userCtx) {
+                return true;
+            };
+
+            const metadata = createRuleMetadata({
+                name: 'Retrievable Test Validator',
+                description: 'A test validator for metadata retrieval',
+                tags: ['test', 'metadata', 'retrieval'],
+                version: '1.2.3'
+            });
+
+            // Load the design document
+            await couchHelper.loadDesignDocumentWithMetadata('retrievableValidator', validator, metadata);
+
+            // Retrieve it back
+            const retrievedDoc = await couchHelper.getDesignDocument('retrievableValidator');
+            
+            assert.strictEqual(retrievedDoc._id, '_design/retrievableValidator');
+            assert(retrievedDoc.rule_metadata, 'Should contain rule_metadata');
+            assert.strictEqual(retrievedDoc.rule_metadata.name, 'Retrievable Test Validator');
+            assert.strictEqual(retrievedDoc.rule_metadata.description, 'A test validator for metadata retrieval');
+            assert.strictEqual(retrievedDoc.rule_metadata.version, '1.2.3');
+            assert.deepStrictEqual(retrievedDoc.rule_metadata.tags, ['test', 'metadata', 'retrieval']);
+            assert(retrievedDoc.validate_doc_update, 'Should contain validation function');
+        });
+
         it('should clean up design documents', async function() {
             // Load a couple of design documents
             const validator1 = function() { return true; };
