@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CouchDB Rules Engine - Management Interface</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+    <div id="app">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="container">
+                <h1>CouchDB Rules Engine</h1>
+                <p class="subtitle">Validation Rule Management Interface</p>
+                <nav class="nav-tabs">
+                    <button class="nav-tab active" data-tab="rules">Rules</button>
+                    <button class="nav-tab" data-tab="create">Create Rule</button>
+                    <button class="nav-tab" data-tab="test">Test Rules</button>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Main Content Area -->
+        <main class="app-main">
+            <div class="container">
+                <!-- Connection Status -->
+                <div id="connection-status" class="status-bar">
+                    <span class="status-indicator" id="status-indicator"></span>
+                    <span class="status-text" id="status-text">Connecting to CouchDB...</span>
+                </div>
+
+                <!-- Rules Tab -->
+                <div id="rules-tab" class="tab-content active">
+                    <div class="tab-header">
+                        <h2>Validation Rules</h2>
+                        <button class="btn btn-primary" id="refresh-rules">Refresh</button>
+                    </div>
+                    <div id="rules-list" class="rules-container">
+                        <!-- RuleList component will be inserted here -->
+                    </div>
+                </div>
+
+                <!-- Create Rule Tab -->
+                <div id="create-tab" class="tab-content">
+                    <div class="tab-header">
+                        <h2>Create New Rule</h2>
+                    </div>
+                    <div id="rule-form-container">
+                        <!-- Rule creation form will be inserted here -->
+                    </div>
+                </div>
+
+                <!-- Test Rules Tab -->
+                <div id="test-tab" class="tab-content">
+                    <div class="tab-header">
+                        <h2>Test Validation Rules</h2>
+                    </div>
+                    <div id="test-panel-container">
+                        <!-- TestPanel component will be inserted here -->
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Rule Details Modal -->
+        <div id="rule-modal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 id="modal-title">Rule Details</h3>
+                    <button class="modal-close" id="modal-close">&times;</button>
+                </div>
+                <div class="modal-body" id="modal-body">
+                    <!-- Rule details will be inserted here -->
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" id="modal-cancel">Close</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Loading Overlay -->
+        <div id="loading-overlay" class="loading-overlay">
+            <div class="loading-spinner"></div>
+            <p>Loading...</p>
+        </div>
+
+        <!-- Error Toast -->
+        <div id="error-toast" class="toast error-toast">
+            <div class="toast-content">
+                <span class="toast-message" id="error-message"></span>
+                <button class="toast-close" id="error-close">&times;</button>
+            </div>
+        </div>
+
+        <!-- Success Toast -->
+        <div id="success-toast" class="toast success-toast">
+            <div class="toast-content">
+                <span class="toast-message" id="success-message"></span>
+                <button class="toast-close" id="success-close">&times;</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Modules -->
+    <script src="js/utils/helpers.js"></script>
+    <script src="js/utils/couchdb-client.js"></script>
+    <script src="js/components/RuleList.js"></script>
+    <script src="js/components/RuleEditor.js"></script>
+    <script src="js/components/TestPanel.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

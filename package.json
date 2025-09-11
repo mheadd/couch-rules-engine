@@ -11,7 +11,8 @@
     "test:integration": "mocha \"test/integration/**/*.test.js\"",
     "test:unit": "mocha \"test/unit/**/*.test.js\"",
     "test:watch": "mocha \"test/**/*.test.js\" --watch",
-    "test:coverage": "echo 'Coverage reporting not yet implemented'"
+    "test:coverage": "echo 'Coverage reporting not yet implemented'",
+    "serve:web": "cd web && python3 -m http.server 8080"
   },
   "author": "Mark J. Headd (mheadd@gmail.com)",
   "license": "ISC",

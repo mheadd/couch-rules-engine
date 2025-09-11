@@ -4,7 +4,15 @@
 
 This is a prototype effort to evaluate the suitability of using [CouchDB](http://couchdb.apache.org/) as the foundation for a rules engine using the built in [document validation features](http://docs.couchdb.org/en/stable/ddocs/ddocs.html#validate-document-update-functions).
 
-Note - [ROADMAP.md](ROADMAP.md ) file contains next steps for building this project out.
+## Features
+
+✅ **Enhanced Rule Metadata Structure** - Comprehensive metadata for validation rules including version control, dependencies, and validation contexts  
+✅ **Web Interface** - Modern web interface for managing validation rules and testing documents  
+✅ **Direct CouchDB API** - CORS-enabled direct communication with CouchDB (no middleware required)  
+✅ **Rule Testing** - Interactive testing panel for validating documents against rules  
+✅ **Component Architecture** - Modular, vanilla JavaScript implementation  
+
+Note - [ROADMAP.md](ROADMAP.md) contains next steps for building this project out.
 
 ## CouchDB overview
 
@@ -45,11 +53,26 @@ This script will:
 
 - Pull the CouchDB Docker image
 - Start a CouchDB container on port 5984 (default admin/password: admin/password)
-- Create a test database named `test`
+- Create a test database named `rules_db`
 - Install npm dependencies
 - Load validation rules into CouchDB
+- Configure CORS for web interface access
 
-You can now test submitting documents to CouchDB as described below.
+**To use the web interface:**
+
+```bash
+npm run serve:web
+```
+
+Then open http://127.0.0.1:8080 in your browser to access the web interface.
+
+**Web Interface Features:**
+- View and manage validation rules
+- Test documents against validation rules
+- Configure CouchDB connection settings
+- Real-time validation feedback
+
+You can also test submitting documents via command line as described below.
 
 ---
 
@@ -66,7 +89,7 @@ npm test
 Test submitting a **valid** application for service (located in the `samples` directory):
 
 ```bash
-curl -X POST http://admin:password@localhost:5984/test -d @samples/sample_person_valid.json -H 'Content-type: application/json'
+curl -X POST http://admin:password@localhost:5984/rules_db -d @samples/sample_person_valid.json -H 'Content-type: application/json'
 ```
 
 Sample result:
@@ -82,7 +105,7 @@ Sample result:
 Test submitting an **invalid** application for service (located in the `samples` directory):
 
 ```bash
-curl -X POST http://admin:password@localhost:5984/test -d @samples/sample_person_invalid.json -H 'Content-type: application/json'
+curl -X POST http://admin:password@localhost:5984/rules_db -d @samples/sample_person_invalid.json -H 'Content-type: application/json'
 ```
 
 Sample result:
@@ -93,3 +116,33 @@ Sample result:
   "reason": "Income must be lower than $25,000"
 }
 ```
+
+## Project Structure
+
+```
+├── web/                    # Web interface for rule management
+│   ├── index.html         # Single-page application
+│   ├── css/               # Styling (vanilla CSS)
+│   └── js/                # JavaScript components
+├── validators/            # CouchDB validation rules
+├── test/                  # Comprehensive test suite
+│   ├── unit/              # Individual rule tests
+│   ├── integration/       # CouchDB integration tests
+│   └── helpers/           # Test utilities
+├── samples/               # Sample documents for testing
+└── utilities/             # Helper scripts and utilities
+```
+
+## Documentation
+
+- **[ROADMAP.md](ROADMAP.md)** - Development roadmap and future plans
+- **[TROUBLESHOOTING.md](TROUBLESHOOTING.md)** - Common issues and solutions
+- **[METADATA_GUIDE.md](METADATA_GUIDE.md)** - Rule metadata documentation
+- **[TESTING_GUIDE.md](TESTING_GUIDE.md)** - Testing framework guide
+
+## Quick Start
+
+1. **Setup**: `./setup.sh` (starts CouchDB, loads rules)
+2. **Web Interface**: `npm run serve:web` → http://127.0.0.1:8080  
+3. **Run Tests**: `npm test`
+4. **Troubleshooting**: See [TROUBLESHOOTING.md](TROUBLESHOOTING.md)
