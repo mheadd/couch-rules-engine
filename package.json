@@ -6,7 +6,12 @@
   "scripts": {
     "load": "node couchLoader.js",
     "unload": "node couchUnloader.js",
-    "test": "mocha"
+    "test": "mocha \"test/**/*.test.js\"",
+    "test:validators": "mocha \"test/unit/validators/**/*.test.js\"",
+    "test:integration": "mocha \"test/integration/**/*.test.js\"",
+    "test:unit": "mocha \"test/unit/**/*.test.js\"",
+    "test:watch": "mocha \"test/**/*.test.js\" --watch",
+    "test:coverage": "echo 'Coverage reporting not yet implemented'"
   },
   "author": "Mark J. Headd (mheadd@gmail.com)",
   "license": "ISC",

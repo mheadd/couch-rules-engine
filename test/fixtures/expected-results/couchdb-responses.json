@@ -1,0 +1,95 @@
+{
+  "description": "Expected CouchDB responses for various document operations",
+  "successfulInsertion": {
+    "structure": {
+      "ok": true,
+      "id": "string",
+      "rev": "string"
+    },
+    "example": {
+      "ok": true,
+      "id": "7e2d9fe77a60c59bdc4d0f48e50111d4",
+      "rev": "1-756e1cc042469549bba59e49813b866a"
+    }
+  },
+  "validationFailure": {
+    "structure": {
+      "error": "forbidden",
+      "reason": "string"
+    },
+    "examples": {
+      "incomeValidation": {
+        "error": "forbidden",
+        "reason": "Income must be lower than $25,000"
+      },
+      "householdSizeValidation": {
+        "error": "forbidden", 
+        "reason": "Household size must be greater than 2."
+      },
+      "dependentsValidation": {
+        "error": "forbidden",
+        "reason": "The number of dependents in the household must be 1 or more."
+      },
+      "interviewValidation": {
+        "error": "forbidden",
+        "reason": "Interview must be completed."
+      }
+    }
+  },
+  "databaseOperations": {
+    "databaseCreation": {
+      "success": {
+        "ok": true
+      },
+      "alreadyExists": {
+        "error": "file_exists",
+        "reason": "The database could not be created, the file already exists."
+      }
+    },
+    "databaseInfo": {
+      "structure": {
+        "db_name": "string",
+        "doc_count": "number",
+        "doc_del_count": "number",
+        "update_seq": "string",
+        "purge_seq": "number",
+        "compact_running": "boolean",
+        "disk_size": "number",
+        "data_size": "number",
+        "instance_start_time": "string"
+      }
+    },
+    "designDocumentsList": {
+      "structure": {
+        "total_rows": "number",
+        "offset": "number",
+        "rows": "array"
+      },
+      "rowStructure": {
+        "id": "string",
+        "key": "string", 
+        "value": {
+          "rev": "string"
+        }
+      }
+    }
+  },
+  "errorScenarios": {
+    "unauthorizedAccess": {
+      "error": "unauthorized",
+      "reason": "Authentication required."
+    },
+    "databaseNotFound": {
+      "error": "not_found",
+      "reason": "Database does not exist."
+    },
+    "documentNotFound": {
+      "error": "not_found",
+      "reason": "missing"
+    },
+    "conflictError": {
+      "error": "conflict",
+      "reason": "Document update conflict."
+    }
+  }
+}
