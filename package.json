@@ -16,7 +16,9 @@
   },
   "author": "Mark J. Headd (mheadd@gmail.com)",
   "license": "ISC",
-  "dependencies": {},
+  "dependencies": {
+    "node-fetch": "^3.3.2"
+  },
   "devDependencies": {
     "mocha": "^10.2.0"
   }

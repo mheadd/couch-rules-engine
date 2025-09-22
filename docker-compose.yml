@@ -1,0 +1,68 @@
+version: '3.8'
+
+services:
+  couchdb:
+    image: couchdb:latest
+    container_name: couchdb-rules-engine
+    environment:
+      - COUCHDB_USER=admin
+      - COUCHDB_PASSWORD=password
+      - COUCHDB_SECRET=mysecret
+    ports:
+      - "5984:5984"
+    volumes:
+      - couchdb_data:/opt/couchdb/data
+      - couchdb_config:/opt/couchdb/etc/local.d
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5984/_up"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    networks:
+      - rules-engine-network
+
+  web-interface:
+    build:
+      context: ./web
+      dockerfile: Dockerfile
+    container_name: rules-engine-web
+    ports:
+      - "8080:80"
+    depends_on:
+      couchdb:
+        condition: service_healthy
+    environment:
+      - COUCHDB_URL=http://couchdb:5984
+      - COUCHDB_DATABASE=rules_db
+    networks:
+      - rules-engine-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  initializer:
+    build:
+      context: .
+      dockerfile: Dockerfile.initializer
+    container_name: rules-engine-initializer
+    depends_on:
+      couchdb:
+        condition: service_healthy
+    environment:
+      - COUCHDB_URL=http://couchdb:5984
+      - COUCHDB_USER=admin
+      - COUCHDB_PASSWORD=password
+      - DB_NAME=rules_db
+    networks:
+      - rules-engine-network
+    restart: "no"
+
+volumes:
+  couchdb_data:
+  couchdb_config:
+
+networks:
+  rules-engine-network:
+    driver: bridge

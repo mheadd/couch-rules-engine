@@ -1,0 +1,23 @@
+FROM node:18-alpine
+
+WORKDIR /app
+
+# Install curl for health checks and API calls
+RUN apk add --no-cache curl
+
+# Copy package files and install dependencies
+COPY package*.json ./
+RUN npm ci --only=production
+
+# Copy setup scripts and validation rules
+COPY couchLoader.js ./
+COPY index.js ./
+COPY config.js ./
+COPY validators/ ./validators/
+COPY utils/ ./utils/
+
+# Copy initialization script
+COPY scripts/docker-init.sh ./
+RUN chmod +x docker-init.sh
+
+CMD ["./docker-init.sh"]
