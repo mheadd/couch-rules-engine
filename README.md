@@ -6,11 +6,13 @@ This is a prototype effort to evaluate the suitability of using [CouchDB](http:/
 
 ## Features
 
+✅ **Docker Compose Orchestration** - Single command deployment with automated setup  
 ✅ **Enhanced Rule Metadata Structure** - Comprehensive metadata for validation rules including version control, dependencies, and validation contexts  
 ✅ **Web Interface** - Modern web interface for managing validation rules and testing documents  
 ✅ **Direct CouchDB API** - CORS-enabled direct communication with CouchDB (no middleware required)  
 ✅ **Rule Testing** - Interactive testing panel for validating documents against rules  
 ✅ **Component Architecture** - Modular, vanilla JavaScript implementation  
+✅ **Production Ready** - Containerized deployment with health checks and proper networking  
 
 Note - [ROADMAP.md](ROADMAP.md) contains next steps for building this project out.
 
@@ -43,38 +45,74 @@ Validation rules can be used to ensure that only "valid" data is saved, or that 
 
 ## Using this prototype
 
-Clone this repo and `cd` into the project directory.
+### Prerequisites
 
-**To set up and run everything:**
+- [Docker](https://www.docker.com/get-started) and [Docker Compose](https://docs.docker.com/compose/install/)
+- [Git](https://git-scm.com/) for cloning the repository
+
+### Quick Start
+
+Clone this repo and start the entire stack with a single command:
 
 ```bash
-./setup.sh
+git clone https://github.com/mheadd/couch-rules-engine.git
+cd couch-rules-engine
+docker-compose up -d
 ```
 
-This script will:
-
-- Pull the CouchDB Docker image
-- Start a CouchDB container on port 5984 (default admin/password: admin/password)
-- Create a test database named `rules_db`
-- Install npm dependencies
-- Load validation rules into CouchDB
+This will:
+- Start CouchDB with admin credentials (admin/password)
+- Create the `rules_db` database with all validation rules
 - Configure CORS for web interface access
+- Start the web interface on port 8080
+- Set up proper Docker networking between services
 
-**To use the web interface:**
+### Access the Application
+
+- **Web Interface**: http://localhost:8080
+- **CouchDB Admin**: http://localhost:5984/_utils
+- **CouchDB API**: http://localhost:5984
+
+### Environment Configuration
+
+The application supports environment-based configuration. Default values:
+
+- `COUCHDB_USER`: admin
+- `COUCHDB_PASSWORD`: password  
+- `COUCHDB_SECRET`: mysecret
+- `DB_NAME`: rules_db
+
+### Managing the Stack
 
 ```bash
-npm run serve:web
+# Start all services
+docker-compose up -d
+
+# View logs
+docker-compose logs -f
+
+# Stop all services
+docker-compose down
+
+# Rebuild and restart
+docker-compose up --build -d
+
+# View running containers
+docker-compose ps
 ```
 
-Then open http://127.0.0.1:8080 in your browser to access the web interface.
+### Web Interface Features
 
-**Web Interface Features:**
-- View and manage validation rules
+The web interface (http://localhost:8080) provides:
+- View and manage validation rules with metadata
 - Test documents against validation rules
-- Configure CouchDB connection settings
 - Real-time validation feedback
+- Rule creation and editing capabilities
+- Direct CouchDB integration
 
-You can also test submitting documents via command line as described below.
+### Command Line Testing
+
+You can also test submitting documents via command line:
 
 ---
 
@@ -122,29 +160,50 @@ Sample result:
 ## Project Structure
 
 ```
-├── web/                    # Web interface for rule management
-│   ├── index.html         # Single-page application
-│   ├── css/               # Styling (vanilla CSS)
-│   └── js/                # JavaScript components
-├── validators/            # CouchDB validation rules
-├── test/                  # Comprehensive test suite
-│   ├── unit/              # Individual rule tests
-│   ├── integration/       # CouchDB integration tests
-│   └── helpers/           # Test utilities
-├── samples/               # Sample documents for testing
-└── utilities/             # Helper scripts and utilities
+├── docker-compose.yml          # Container orchestration
+├── Dockerfile.initializer      # Automated setup container
+├── web/                        # Web interface for rule management
+│   ├── Dockerfile             # Nginx-based web container
+│   ├── index.html             # Single-page application
+│   ├── css/                   # Styling (vanilla CSS)
+│   └── js/                    # JavaScript components
+├── scripts/                   # Setup and utility scripts
+│   └── docker-init.sh         # Container initialization script
+├── validators/                # CouchDB validation rules
+├── test/                      # Comprehensive test suite
+│   ├── unit/                  # Individual rule tests
+│   ├── integration/           # CouchDB integration tests
+│   └── helpers/               # Test utilities
+├── samples/                   # Sample documents for testing
+└── utilities/                 # Helper scripts and utilities
 ```
+
+## Architecture
+
+The application uses a containerized architecture with Docker Compose:
+
+- **CouchDB Container**: Database with validation rules and admin interface
+- **Web Interface Container**: Nginx-served static site for rule management  
+- **Initializer Container**: Automated setup, CORS configuration, and rule loading
+- **Docker Network**: Isolated networking between containers
+- **Health Checks**: Ensures proper startup sequence and service availability
 
 ## Documentation
 
 - **[ROADMAP.md](ROADMAP.md)** - Development roadmap and future plans
-- **[TROUBLESHOOTING.md](TROUBLESHOOTING.md)** - Common issues and solutions
+- **[TROUBLESHOOTING.md](TROUBLESHOOTING.md)** - Common issues and solutions  
 - **[METADATA_GUIDE.md](METADATA_GUIDE.md)** - Rule metadata documentation
 - **[TESTING_GUIDE.md](TESTING_GUIDE.md)** - Testing framework guide
 
-## Quick Start
+## Quick Start Summary
 
-1. **Setup**: `./setup.sh` (starts CouchDB, loads rules)
-2. **Web Interface**: `npm run serve:web` → http://127.0.0.1:8080  
-3. **Run Tests**: `npm test`
-4. **Troubleshooting**: See [TROUBLESHOOTING.md](TROUBLESHOOTING.md)
+1. **Prerequisites**: Install Docker and Docker Compose
+2. **Clone & Start**: `git clone https://github.com/mheadd/couch-rules-engine.git && cd couch-rules-engine && docker-compose up -d`
+3. **Web Interface**: http://localhost:8080
+4. **CouchDB Admin**: http://localhost:5984/_utils  
+5. **Run Tests**: `npm test`
+6. **Troubleshooting**: See [TROUBLESHOOTING.md](TROUBLESHOOTING.md)
+
+## Legacy Setup
+
+For the legacy manual setup process, see the `setup.sh` file (now deprecated in favor of Docker Compose).
