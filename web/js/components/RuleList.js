@@ -230,27 +230,19 @@ class RuleList {
      * View rule details
      */
     async viewRuleDetails(ruleId) {
-        console.log('viewRuleDetails called with ruleId:', ruleId);
-        console.log('Available rules:', this.rules.map(r => r.id));
-        console.log('window.ruleDetails available:', !!window.ruleDetails);
-        
         // Find rule by matching the ruleId (without _design/) against rule.id (with _design/)
         const rule = this.rules.find(r => r.id === `_design/${ruleId}` || r.id === ruleId);
         if (!rule) {
-            console.error('Rule not found for ruleId:', ruleId);
             Notifications.error('Rule not found');
             return;
         }
         
-        console.log('Found rule:', rule);
         UIState.setSelectedRule(rule);
         
         // Use RuleDetails to show details
         if (window.ruleDetails) {
-            console.log('Calling window.ruleDetails.showRuleDetails');
             window.ruleDetails.showRuleDetails(rule);
         } else {
-            console.error('window.ruleDetails not available');
             Notifications.error('Rule details component not available');
         }
     }

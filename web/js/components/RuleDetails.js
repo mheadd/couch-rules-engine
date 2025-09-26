@@ -81,11 +81,8 @@ class RuleDetails {
      * Show rule details from rule object
      */
     showRuleDetails(rule) {
-        console.log('RuleDetails.showRuleDetails called with rule:', rule);
         this.currentRule = rule;
-        console.log('About to render...');
         this.render();
-        console.log('About to show modal...');
         this.show();
     }
 
@@ -94,15 +91,6 @@ class RuleDetails {
      */
     render() {
         if (!this.currentRule || !this.modal) return;
-
-        console.log('Rendering rule details for:', this.currentRule);
-        console.log('Rule properties:', Object.keys(this.currentRule));
-        console.log('Rule validate_doc_update:', this.currentRule.validate_doc_update);
-        console.log('Rule doc.validate_doc_update:', this.currentRule.doc?.validate_doc_update);
-        console.log('Rule _rev:', this.currentRule._rev);
-        console.log('Rule rev:', this.currentRule.rev);
-        console.log('Rule value:', this.currentRule.value);
-        console.log('Rule doc:', this.currentRule.doc);
 
         const metadata = DataFormat.formatRuleMetadata(this.currentRule.metadata || this.currentRule.rule_metadata);
         
@@ -222,8 +210,6 @@ class RuleDetails {
         const version = metadata.version || '1.0.0';
         const revision = document._rev || document.rev || document.value?.rev || document.doc?._rev;
         
-        console.log('formatVersionInfo - version:', version, 'revision:', revision);
-        
         let versionHtml = `
             <div class="version-primary">
                 <span class="version-number">v${StringUtils.escapeHtml(version)}</span>
@@ -264,23 +250,11 @@ class RuleDetails {
      * Show modal
      */
     show() {
-        console.log('RuleDetails.show called, modal exists:', !!this.modal);
         if (this.modal) {
-            console.log('Adding show class to modal');
-            console.log('Modal element:', this.modal);
-            console.log('Modal computed style before:', window.getComputedStyle(this.modal).display);
-            console.log('Modal computed style z-index before:', window.getComputedStyle(this.modal).zIndex);
-            
             this.modal.style.display = 'flex'; // Use flex to match CSS
             this.modal.classList.add('show');
             this.isVisible = true;
             document.body.classList.add('modal-open');
-            
-            console.log('Modal computed style after:', window.getComputedStyle(this.modal).display);
-            console.log('Modal has show class:', this.modal.classList.contains('show'));
-            console.log('Modal should now be visible');
-        } else {
-            console.error('Modal not found!');
         }
     }
 
