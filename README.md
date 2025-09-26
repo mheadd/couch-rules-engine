@@ -16,8 +16,6 @@ This is a prototype effort to evaluate the suitability of using [CouchDB](http:/
 
 Note - [ROADMAP.md](ROADMAP.md) contains next steps for building this project out.
 
-<img src="ui.png" alt="CouchDB Rules Engine Web Interface" style="border: 1px solid #ddd; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); max-width: 100%;">
-
 ## CouchDB overview
 
 CouchDB is a document-oriented database that stores documents in JSON format and supports [map/reduce]([http://docs.couchdb.org/en/2.2.0/ddocs/ddocs.html#view-functions](https://docs.couchdb.org/en/stable/ddocs/views/intro.html)) for querying documents. CouchDB exposes a number of [REST endpoints](https://docs.couchdb.org/en/latest/intro/api.html) for interacting and managing single instances or clusters. In addition, CouchDB supports a special type of document called a [design document](https://docs.couchdb.org/en/stable/api/ddoc/index.html) that are used to query, display, aggregate and validate updates to data in a CouchDB database.
