@@ -97,6 +97,13 @@ class RuleList {
      */
     renderRuleCard(rule) {
         const metadata = DataFormat.formatRuleMetadata(rule.metadata);
+        const ruleId = rule.id.replace('_design/', '');
+        
+        // Extract version and revision info
+        const version = metadata.version || '1.0.0';
+        const revision = rule._rev ? rule._rev.split('-')[0] : 'N/A';
+        const status = metadata.status || 'unknown';
+        
         const tags = metadata.tags.map(tag => 
             `<span class="rule-tag">${StringUtils.escapeHtml(tag)}</span>`
         ).join('');
@@ -104,25 +111,44 @@ class RuleList {
         return `
             <div class="rule-card" data-rule-id="${rule.id}">
                 <div class="rule-card-header">
-                    <div>
+                    <div class="rule-title-section">
                         <h3 class="rule-card-title">${StringUtils.escapeHtml(metadata.name)}</h3>
-                        <p class="rule-card-description">
-                            ${StringUtils.escapeHtml(StringUtils.truncate(metadata.description, 120))}
-                        </p>
+                        <div class="version-badge">v${StringUtils.escapeHtml(version)}</div>
                     </div>
-                    <span class="rule-card-version">v${StringUtils.escapeHtml(metadata.version)}</span>
+                    <div class="rule-status">
+                        <span class="status-indicator status-${status}"></span>
+                        <span class="revision-info">Rev ${StringUtils.escapeHtml(revision)}</span>
+                    </div>
                 </div>
                 
-                <div class="rule-card-meta">
-                    <span class="rule-card-author">
-                        <strong>Author:</strong> ${StringUtils.escapeHtml(metadata.author)}
-                    </span>
-                    <span class="rule-card-date">
-                        <strong>Modified:</strong> ${metadata.modified}
-                    </span>
+                <div class="rule-card-body">
+                    <p class="rule-card-description">
+                        ${StringUtils.escapeHtml(StringUtils.truncate(metadata.description, 120))}
+                    </p>
+                    
+                    <div class="rule-metadata-summary">
+                        ${metadata.author ? `
+                            <div class="metadata-item">
+                                <span class="label">Author:</span>
+                                <span class="value">${StringUtils.escapeHtml(metadata.author)}</span>
+                            </div>
+                        ` : ''}
+                        
+                        ${metadata.modified ? `
+                            <div class="metadata-item">
+                                <span class="label">Modified:</span>
+                                <span class="value">${StringUtils.escapeHtml(metadata.modified)}</span>
+                            </div>
+                        ` : ''}
+                    </div>
+                    
+                    ${tags ? `
+                        <div class="rule-tags-preview">
+                            ${metadata.tags.slice(0, 3).map(tag => `<span class="tag-small">${StringUtils.escapeHtml(tag)}</span>`).join('')}
+                            ${metadata.tags.length > 3 ? `<span class="tag-more">+${metadata.tags.length - 3}</span>` : ''}
+                        </div>
+                    ` : ''}
                 </div>
-                
-                ${tags ? `<div class="rule-card-tags">${tags}</div>` : ''}
                 
                 <div class="rule-card-footer">
                     <div class="rule-status ${metadata.status}">
@@ -132,7 +158,7 @@ class RuleList {
                     
                     <div class="rule-actions">
                         <button class="btn btn-sm btn-secondary view-rule" 
-                                data-rule-id="${rule.id}">
+                                data-rule-id="${ruleId}">
                             View Details
                         </button>
                     </div>
@@ -150,12 +176,8 @@ class RuleList {
                 <div class="empty-state-icon">📋</div>
                 <h3 class="empty-state-title">No Validation Rules Found</h3>
                 <p class="empty-state-description">
-                    There are no validation rules in the database. 
-                    Create your first rule using the "Create Rule" tab.
+                    There are no validation rules in the database.
                 </p>
-                <button class="btn btn-primary" onclick="UIState.setTab('create')">
-                    Create Your First Rule
-                </button>
             </div>
         `;
     }
@@ -208,7 +230,8 @@ class RuleList {
      * View rule details
      */
     async viewRuleDetails(ruleId) {
-        const rule = this.rules.find(r => r.id === ruleId);
+        // Find rule by matching the ruleId (without _design/) against rule.id (with _design/)
+        const rule = this.rules.find(r => r.id === `_design/${ruleId}` || r.id === ruleId);
         if (!rule) {
             Notifications.error('Rule not found');
             return;
@@ -216,9 +239,11 @@ class RuleList {
         
         UIState.setSelectedRule(rule);
         
-        // Use RuleEditor to show details
-        if (window.ruleEditor) {
-            window.ruleEditor.showRuleDetails(rule);
+        // Use RuleDetails to show details
+        if (window.ruleDetails) {
+            window.ruleDetails.showRuleDetails(rule);
+        } else {
+            Notifications.error('Rule details component not available');
         }
     }
     

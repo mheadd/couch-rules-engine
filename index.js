@@ -1,11 +1,25 @@
-const householdIncome = require('./validators/householdIncome');
-const householdSize = require('./validators/householdSize');
-const interviewComplete = require('./validators/interviewComplete');
-const numberOfDependents = require('./validators/numberOfDependents');
+const fs = require('fs');
+const path = require('path');
 
- module.exports = {
-    householdIncome: householdIncome,
-    householdSize: householdSize,
-    interviewComplete: interviewComplete,
-    numberOfDependents: numberOfDependents
-};
+// Automatically discover and export all validators
+const validators = {};
+const validatorsDir = path.join(__dirname, 'validators');
+
+try {
+    const files = fs.readdirSync(validatorsDir);
+    const validatorFiles = files.filter(file => file.endsWith('.js'));
+    
+    for (const file of validatorFiles) {
+        const validatorName = path.basename(file, '.js');
+        const validatorModule = require(path.join(validatorsDir, file));
+        
+        // Only include if it exports the expected validator function
+        if (typeof validatorModule[validatorName] === 'function') {
+            validators[validatorName] = validatorModule;
+        }
+    }
+} catch (error) {
+    console.error('Error loading validators:', error.message);
+}
+
+module.exports = validators;
