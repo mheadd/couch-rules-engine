@@ -135,10 +135,6 @@ class RuleList {
                                 data-rule-id="${rule.id}">
                             View Details
                         </button>
-                        <button class="btn btn-sm btn-primary test-rule" 
-                                data-rule-id="${rule.id}">
-                            Test Rule
-                        </button>
                     </div>
                 </div>
             </div>
@@ -204,15 +200,6 @@ class RuleList {
                 e.stopPropagation();
                 const ruleId = button.dataset.ruleId;
                 this.viewRuleDetails(ruleId);
-            });
-        });
-        
-        // Test rule button
-        DOM.queryAll('.test-rule').forEach(button => {
-            DOM.on(button, 'click', (e) => {
-                e.stopPropagation();
-                const ruleId = button.dataset.ruleId;
-                this.testRule(ruleId);
             });
         });
     }

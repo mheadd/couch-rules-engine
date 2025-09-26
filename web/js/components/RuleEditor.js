@@ -191,14 +191,7 @@ class RuleEditor {
      */
     renderModalFooter() {
         return `
-            <button class="btn btn-secondary" id="modal-cancel">Close</button>
-            <button class="btn btn-primary" onclick="ruleEditor.testCurrentRule()">
-                Test This Rule
-            </button>
-            <button class="btn btn-primary" onclick="ruleEditor.editCurrentRule()" disabled title="Editing will be available in Phase 2">
-                Edit Rule
-            </button>
-        `;
+            <button class="btn btn-secondary" id="modal-cancel">Close</button>`;
     }
     
     /**
