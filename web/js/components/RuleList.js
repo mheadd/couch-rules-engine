@@ -150,12 +150,8 @@ class RuleList {
                 <div class="empty-state-icon">📋</div>
                 <h3 class="empty-state-title">No Validation Rules Found</h3>
                 <p class="empty-state-description">
-                    There are no validation rules in the database. 
-                    Create your first rule using the "Create Rule" tab.
+                    There are no validation rules in the database.
                 </p>
-                <button class="btn btn-primary" onclick="UIState.setTab('create')">
-                    Create Your First Rule
-                </button>
             </div>
         `;
     }
