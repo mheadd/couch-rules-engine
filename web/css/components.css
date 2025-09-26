@@ -472,3 +472,375 @@
         grid-template-columns: 1fr;
     }
 }
+
+/* Enhanced Version Display Styles */
+
+/* Version Information Section */
+.version-section {
+    background: var(--background-light, #f8fafc);
+    border: 2px solid var(--primary-color);
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.version-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.version-info * {
+    color: var(--text-primary, #1e293b);
+}
+
+.version-primary {
+    text-align: center;
+}
+
+.version-number {
+    display: inline-block;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    padding: 0.5rem 1rem;
+    border: 3px solid var(--primary-color);
+    border-radius: var(--border-radius);
+    background-color: white;
+    min-width: 120px;
+}
+
+.version-secondary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem;
+    background: white;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary, #1e293b);
+}
+
+.revision-info {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-primary, #1e293b);
+}
+
+.revision-number {
+    font-weight: 600;
+    color: var(--primary-color);
+    font-family: monospace;
+}
+
+.revision-hash {
+    font-family: monospace;
+    color: var(--text-muted, #94a3b8);
+    font-size: 0.9rem;
+}
+
+.last-modified {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-primary, #1e293b);
+}
+
+.last-modified label {
+    color: var(--text-muted, #94a3b8);
+    font-weight: 500;
+}
+
+.last-modified span {
+    color: var(--text-primary, #1e293b);
+    font-weight: normal;
+}
+
+/* Enhanced Rule Card Styling with Version Display */
+.rule-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+}
+
+.rule-title-section {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex: 1;
+}
+
+.version-badge {
+    background: var(--primary-color);
+    color: white;
+    padding: 0.25rem 0.5rem;
+    border-radius: 1rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.rule-status {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.status-indicator {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.status-indicator.status-active {
+    background: var(--success-color);
+}
+
+.status-indicator.status-draft {
+    background: var(--warning-color);
+}
+
+.status-indicator.status-inactive {
+    background: var(--error-color);
+}
+
+.status-indicator.status-unknown {
+    background: var(--text-muted);
+}
+
+.revision-info {
+    font-family: monospace;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.rule-metadata-summary {
+    margin: 0.75rem 0;
+    padding: 0.75rem;
+    background: var(--background-light);
+    border-radius: var(--border-radius);
+    font-size: 0.85rem;
+}
+
+.rule-metadata-summary .metadata-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.25rem;
+}
+
+.rule-metadata-summary .metadata-item:last-child {
+    margin-bottom: 0;
+}
+
+.rule-metadata-summary .label {
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+.rule-tags-preview {
+    margin-top: 0.5rem;
+}
+
+.tag-small {
+    background: var(--secondary-color);
+    color: white;
+    padding: 0.2rem 0.4rem;
+    border-radius: 0.75rem;
+    font-size: 0.7rem;
+    margin-right: 0.25rem;
+}
+
+.tag-more {
+    color: var(--text-muted);
+    font-size: 0.7rem;
+    font-style: italic;
+}
+
+/* Enhanced metadata grid */
+.metadata-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.metadata-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.metadata-item label {
+    font-weight: 600;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Technical information styling */
+.technical-info {
+    background: var(--background-light);
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    border-left: 4px solid var(--secondary-color);
+}
+
+.technical-info .metadata-item {
+    margin-bottom: 0.75rem;
+}
+
+.technical-info code {
+    background: var(--background-dark, #f1f5f9);
+    color: var(--primary-color);
+    padding: 0.25rem 0.5rem;
+    border-radius: 3px;
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+    font-size: 0.9rem;
+}
+
+/* Status badges with version context */
+.status-badge {
+    padding: 0.375rem 0.75rem;
+    border-radius: 1rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.status-badge.status-active {
+    background: var(--success-color);
+    color: white;
+}
+
+.status-badge.status-draft {
+    background: var(--warning-color);
+    color: white;
+}
+
+.status-badge.status-inactive {
+    background: var(--error-color);
+    color: white;
+}
+
+.status-badge.status-unknown {
+    background: var(--text-muted);
+    color: white;
+}
+
+/* Rule Details Modal Specific Styles */
+.rule-details-content {
+    width: 800px;
+    max-width: 95vw;
+}
+
+.rule-section {
+    margin-bottom: 2rem;
+}
+
+.rule-section h3 {
+    color: var(--primary-color);
+    font-size: var(--font-size-lg);
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--border-color);
+}
+
+.rule-description h4,
+.rule-tags h4 {
+    color: var(--text-primary);
+    font-size: var(--font-size-base);
+    margin-bottom: 0.5rem;
+}
+
+.tags-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.tag {
+    background: var(--secondary-color);
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 1rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.code-container {
+    background: var(--surface-color, #f8fafc);
+    border: 1px solid var(--border-color, #e2e8f0);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+}
+
+.code-container pre {
+    margin: 0;
+    padding: 1rem;
+    overflow-x: auto;
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', monospace;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: var(--text-primary, #1e293b);
+    background: transparent;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+.code-container code {
+    color: var(--text-primary, #1e293b);
+    background: transparent;
+    font-family: inherit;
+}
+
+.change-notes {
+    background: var(--background-light);
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    border-left: 4px solid var(--primary-color);
+}
+
+/* Mobile responsiveness for version display */
+@media (max-width: 768px) {
+    .version-number {
+        font-size: 2rem;
+        min-width: 100px;
+    }
+    
+    .version-secondary {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+    
+    .metadata-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .rule-card-header {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+    
+    .rule-title-section {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+    
+    .rule-details-content {
+        width: 95vw;
+        margin: 1rem;
+    }
+}

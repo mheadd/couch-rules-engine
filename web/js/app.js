@@ -7,7 +7,7 @@ class App {
     constructor() {
         this.components = {
             ruleList: null,
-            ruleEditor: null,
+            ruleDetails: null,
             testPanel: null
         };
         
@@ -224,12 +224,12 @@ class App {
     async initializeComponents() {
         // Initialize components
         this.components.ruleList = new RuleList();
-        this.components.ruleEditor = new RuleEditor();
+        this.components.ruleDetails = new RuleDetails();
         this.components.testPanel = new TestPanel();
         
         // Make components globally available
         window.ruleList = this.components.ruleList;
-        window.ruleEditor = this.components.ruleEditor;
+        window.ruleDetails = this.components.ruleDetails;
         window.testPanel = this.components.testPanel;
         
         // Set up component communication
@@ -240,8 +240,8 @@ class App {
      * Set up communication between components
      */
     setupComponentCommunication() {
-        // Rule list to editor communication
-        if (this.components.ruleList && this.components.ruleEditor) {
+        // Rule list to details communication
+        if (this.components.ruleList && this.components.ruleDetails) {
             // This would be set up when components support events
             // For now, components communicate via global references
         }
