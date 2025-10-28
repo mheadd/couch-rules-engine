@@ -12,7 +12,9 @@ This is a prototype effort to evaluate the suitability of using [CouchDB](http:/
 ✅ **Direct CouchDB API** - CORS-enabled direct communication with CouchDB (no middleware required)  
 ✅ **Rule Testing** - Interactive testing panel for validating documents against rules  
 ✅ **Component Architecture** - Modular, vanilla JavaScript implementation  
-✅ **Production Ready** - Containerized deployment with health checks and proper networking  
+✅ **Production Ready** - Containerized deployment with health checks and proper networking
+
+<img src="ui.png" alt="CouchDB Rules Engine Web Interface" style="border: 2px solid #ddd; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); max-width: 100%; height: auto;">
 
 Note - [ROADMAP.md](ROADMAP.md) contains next steps for building this project out.
 
