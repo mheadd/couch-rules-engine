@@ -6,6 +6,7 @@
   "scripts": {
     "load": "node couchLoader.js",
     "unload": "node couchUnloader.js",
+    "create-rule": "node scripts/create-rule.js",
     "test": "mocha \"test/**/*.test.js\"",
     "test:validators": "mocha \"test/unit/validators/**/*.test.js\"",
     "test:integration": "mocha \"test/integration/**/*.test.js\"",
