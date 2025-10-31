@@ -13,7 +13,8 @@ class MockDataGenerator {
             income: 20000,
             householdSize: 4,
             numberOfDependents: 2,
-            interviewComplete: "true"
+            interviewComplete: "true",
+            age: 20
         };
         
         return { ...defaults, ...overrides };
@@ -28,7 +29,8 @@ class MockDataGenerator {
             income: 35000, // Too high
             householdSize: 2, // Too small
             numberOfDependents: 0, // Too few
-            interviewComplete: "" // Empty
+            interviewComplete: "", // Empty
+            age: 13, // Invalid age
         };
         
         return { ...defaults, ...overrides };

@@ -18,12 +18,7 @@ exports.metadata = {{metadata}};
  * @throws {Object} Throws forbidden error if invalid
  */
 exports.{{functionName}} = function (doc) {
-    // Validation logic
-    if (!({{validationLogic}})) {
-        throw ({
-            forbidden: '{{errorMessage}}'
-        });
-    }
+    {{validationCode}}
     
     return true;
 };

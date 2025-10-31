@@ -28,7 +28,10 @@ describe('{{ruleName}} Validator', function() {
             it(`should reject invalid case ${index + 1}`, function() {
                 assert.throws(() => {
                     validator.{{functionName}}(testDoc);
-                }, /{{errorMessage}}/);
+                }, (err) => {
+                    // CouchDB validation functions throw objects with a 'forbidden' property
+                    return err.forbidden && err.forbidden.includes('{{errorMessage}}');
+                });
             });
         });
     });

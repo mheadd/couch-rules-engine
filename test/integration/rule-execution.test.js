@@ -173,7 +173,8 @@ describe('Rule Execution Integration Tests', function() {
                 const hasValidationError = errorMessage.includes('income') || 
                                          errorMessage.includes('household') || 
                                          errorMessage.includes('dependent') || 
-                                         errorMessage.includes('interview');
+                                         errorMessage.includes('interview') ||
+                                         errorMessage.includes('age');
                 assert.strictEqual(hasValidationError, true, 'Should contain validation error message');
             }
         });
@@ -202,7 +203,8 @@ describe('Rule Execution Integration Tests', function() {
                 const hasValidationError = errorMessage.includes('income') || 
                                          errorMessage.includes('household') || 
                                          errorMessage.includes('dependent') || 
-                                         errorMessage.includes('interview');
+                                         errorMessage.includes('interview') ||
+                                         errorMessage.includes('age');
                 assert.strictEqual(hasValidationError, true, 'Each error should be a validation error');
             });
         });
