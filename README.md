@@ -6,6 +6,7 @@ This is a prototype effort to evaluate the suitability of using [CouchDB](http:/
 
 ## Features
 
+✅ **Interactive Rule Generator** - CLI tool for creating new validation rules with proper field handling  
 ✅ **Docker Compose Orchestration** - Single command deployment with automated setup  
 ✅ **Enhanced Rule Metadata Structure** - Comprehensive metadata for validation rules including version control, dependencies, and validation contexts  
 ✅ **Web Interface** - Modern web interface for managing validation rules and testing documents  
@@ -110,6 +111,27 @@ The web interface (http://localhost:8080) provides:
 - Rule creation and editing capabilities
 - Direct CouchDB integration
 
+### Creating New Validation Rules
+
+Use the interactive rule generator to create new validation rules:
+
+```bash
+npm run create-rule
+```
+
+The generator will guide you through:
+1. **Rule Definition** - Name, description, and author information
+2. **Field Validation** - Specify which field to validate and whether it's required
+3. **Validation Logic** - JavaScript expression that must be true for valid documents
+4. **Test Cases** - Valid and invalid examples for testing
+
+The generator automatically creates:
+- Validator file with proper optional/required field handling
+- Complete test suite
+- Integration with existing codebase
+
+See **[RULE_CREATION.md](RULE_CREATION.md)** for detailed guide and examples.
+
 ### Command Line Testing
 
 You can also test submitting documents via command line:
@@ -190,6 +212,7 @@ The application uses a containerized architecture with Docker Compose:
 
 ## Documentation
 
+- **[RULE_CREATION.md](RULE_CREATION.md)** - Guide for creating new validation rules
 - **[ROADMAP.md](ROADMAP.md)** - Development roadmap and future plans
 - **[TROUBLESHOOTING.md](TROUBLESHOOTING.md)** - Common issues and solutions  
 - **[METADATA_GUIDE.md](METADATA_GUIDE.md)** - Rule metadata documentation
