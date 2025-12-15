@@ -1,4 +1,63 @@
 {
+  "applicationType": "benefits_application",
+  "applicationDate": "2025-12-10",
+  "status": "pending_review",
+  
+  "applicant": {
+    "firstName": "Sally",
+    "lastName": "Smith",
+    "dateOfBirth": "1985-03-15",
+    "ssn": "XXX-XX-1234",
+    "email": "sally.smith@example.com",
+    "phone": "(555) 123-4567"
+  },
+  
+  "address": {
+    "street": "123 Main Street",
+    "apt": "Apt 4B",
+    "city": "Springfield",
+    "state": "IL",
+    "zipCode": "62701",
+    "county": "Sangamon"
+  },
+  
+  "household": {
+    "members": [
+      {
+        "name": "Sally Smith",
+        "relationship": "self",
+        "age": 40,
+        "isDependent": false
+      },
+      {
+        "name": "Michael Smith",
+        "relationship": "child",
+        "age": 12,
+        "isDependent": true
+      },
+      {
+        "name": "Emma Smith",
+        "relationship": "child",
+        "age": 8,
+        "isDependent": true
+      }
+    ]
+  },
+  
+  "employment": {
+    "status": "employed_part_time",
+    "employer": "Springfield Community Center",
+    "occupation": "Administrative Assistant",
+    "monthsEmployed": 18
+  },
+  
+  "eligibilityInterview": {
+    "scheduledDate": "2025-12-05",
+    "completedDate": "2025-12-05",
+    "interviewerName": "James Wilson",
+    "interviewNotes": "Applicant provided all required documentation. Verified employment and household composition."
+  },
+  
   "name": "Sally Smith",
   "income": 17500,
   "householdSize": 3,

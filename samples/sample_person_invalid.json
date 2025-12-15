@@ -1,5 +1,58 @@
 {
-  "name": "Joe johnson",
+  "applicationType": "benefits_application",
+  "applicationDate": "2025-12-12",
+  "status": "pending_review",
+  
+  "applicant": {
+    "firstName": "Joe",
+    "lastName": "Johnson",
+    "dateOfBirth": "1990-07-22",
+    "ssn": "XXX-XX-5678",
+    "email": "joe.johnson@example.com",
+    "phone": "(555) 987-6543"
+  },
+  
+  "address": {
+    "street": "456 Oak Avenue",
+    "apt": null,
+    "city": "Springfield",
+    "state": "IL",
+    "zipCode": "62702",
+    "county": "Sangamon"
+  },
+  
+  "household": {
+    "members": [
+      {
+        "name": "Joe Johnson",
+        "relationship": "self",
+        "age": 35,
+        "isDependent": false
+      },
+      {
+        "name": "Maria Johnson",
+        "relationship": "spouse",
+        "age": 33,
+        "isDependent": false
+      }
+    ]
+  },
+  
+  "employment": {
+    "status": "employed_full_time",
+    "employer": "Acme Corporation",
+    "occupation": "Sales Manager",
+    "monthsEmployed": 36
+  },
+  
+  "eligibilityInterview": {
+    "scheduledDate": "2025-12-15",
+    "completedDate": null,
+    "interviewerName": null,
+    "interviewNotes": null
+  },
+  
+  "name": "Joe Johnson",
   "income": 45000,
   "householdSize": 2,
   "numberOfDependents": 0,

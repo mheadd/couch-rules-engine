@@ -9,9 +9,9 @@ This is a prototype effort to evaluate the suitability of using [CouchDB](http:/
 ✅ **Interactive Rule Generator** - CLI tool for creating new validation rules with proper field handling  
 ✅ **Docker Compose Orchestration** - Single command deployment with automated setup  
 ✅ **Enhanced Rule Metadata Structure** - Comprehensive metadata for validation rules including version control, dependencies, and validation contexts  
-✅ **Web Interface** - Modern web interface for managing validation rules and testing documents  
+✅ **Web Interface** - Clean web interface for viewing and inspecting validation rules  
 ✅ **Direct CouchDB API** - CORS-enabled direct communication with CouchDB (no middleware required)  
-✅ **Rule Testing** - Interactive testing panel for validating documents against rules  
+✅ **Auto-Detecting Loader** - Loader scripts automatically find and deploy new validator files  
 ✅ **Component Architecture** - Modular, vanilla JavaScript implementation  
 ✅ **Production Ready** - Containerized deployment with health checks and proper networking
 
@@ -105,11 +105,12 @@ docker-compose ps
 ### Web Interface Features
 
 The web interface (http://localhost:8080) provides:
-- View and manage validation rules with metadata
-- Test documents against validation rules
-- Real-time validation feedback
-- Rule creation and editing capabilities
+- View all validation rules with metadata
+- Inspect rule details including CouchDB revision information
+- Connection status monitoring
 - Direct CouchDB integration
+
+> **Note**: The web interface is intentionally view-only. Rule creation and management is handled through CLI tools (`npm run create-rule`) which provide better scaffolding, automatic test generation, and integration with development workflows.
 
 ### Creating New Validation Rules
 
