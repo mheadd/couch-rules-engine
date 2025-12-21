@@ -1,4 +1,6 @@
-FROM node:18-alpine
+# Using Docker Hardened Image for improved security
+# The -dev variant includes shell and package manager needed for scripts
+FROM dhi.io/node:20-alpine3.22-dev
 
 WORKDIR /app
 
