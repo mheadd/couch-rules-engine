@@ -1,4 +1,5 @@
-FROM nginx:alpine
+# Using Docker Hardened Image for improved security
+FROM dhi.io/nginx:1-alpine3.21-dev
 
 # Copy web interface files
 COPY . /usr/share/nginx/html/
