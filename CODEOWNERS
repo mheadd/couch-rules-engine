@@ -1,0 +1,4 @@
+# Default code owners for the CouchDB Rules Engine
+# These users will be automatically requested for review on PRs
+
+* @markheadd

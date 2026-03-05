@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "checkJs": true,
+    "module": "commonjs",
+    "target": "ES2022",
+    "moduleResolution": "node",
+    "strict": false,
+    "noEmit": true,
+    "baseUrl": ".",
+    "paths": {
+      "*": ["*"]
+    }
+  },
+  "include": [
+    "*.js",
+    "validators/**/*.js",
+    "utils/**/*.js",
+    "generators/**/*.js",
+    "scripts/**/*.js",
+    "test/**/*.js"
+  ],
+  "exclude": ["node_modules", "web"]
+}
